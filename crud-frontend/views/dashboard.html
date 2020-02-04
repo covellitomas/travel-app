@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>TravelApp</title>
+    </head>
+
+    <body>
+        
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">
+                <img src="https://cdn2.iconfinder.com/data/icons/xbox-one-controllers/500/gamer_white-512.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Historial de Búsquedas
+            </a>
+        </nav>
+
+        <div class="margin-container">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="text-center">Lugares</th>
+                        <th scope="col" class="text-center">Criterios</th>
+                        <th scope="col" class="text-center">Conveniencia</th>
+                    </tr>
+                </thead>
+                
+                <tbody ng-repeat="search in searchHistory">
+                    <tr>
+                        <td class="text-center">{{search.places}}</td>
+                        <td class="text-center">{{search.criteria}}</td>
+                        <td class="text-center">{{search.convenience}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </body>
+</html>
