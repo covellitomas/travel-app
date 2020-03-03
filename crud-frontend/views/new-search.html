@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="GameApp">
+
+    <head>
+        <title>TravelApp</title> 
+    </head>
+
+    <body>
+
+        <div class="login-container">
+
+            <div class="row">
+                <div class="dropdown col-md-6">
+                    <button class="btn btn-secondary dropdown-toggle btn-lg btn-block" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Agregar lugares
+                    </button>
+                    
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" type="button" ng-repeat="placeToSelect in placesToSelect" ng-click="onPlaceDropdownClicked(placeToSelect, $index)">
+                            {{placeToSelect}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-hover table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Lugares</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody ng-repeat="place in placesToCompare">
+                            <tr>
+                                <td>{{place}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="col-md-6">
+                    <table class="table table-hover table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Criterios</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody ng-repeat="criteria in criterias">
+                            <tr>
+                                <td>{{criteria}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <button type="button" class="btn btn-secondary btn-lg btn-block" ng-click="onSaveTableClicked()">Avanzar</button>
+        </div>
+
+    </body>
+
+</html>

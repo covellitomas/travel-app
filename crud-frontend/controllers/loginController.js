@@ -1,11 +1,6 @@
 app.controller("LoginController", ['$scope', '$location', 'UserService', function($scope, $location, UserService) {
 
     var vm = $scope;
-    init();
-
-    function init() {
-        vm.userLogged = [];
-    }
 
     vm.onLoginClicked = function() {
 
@@ -13,8 +8,10 @@ app.controller("LoginController", ['$scope', '$location', 'UserService', functio
         const loginPassword = vm.loginPassword || undefined;
 
         UserService.getUser(loginUsername, loginPassword).then(function(user) {
-            vm.userLogged = user;
-            console.log(user);
+            if (user) {
+                app.userLogged = user;
+                $location.path('/user-choose-table/');
+            }
         });
     }
 

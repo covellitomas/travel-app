@@ -72,9 +72,9 @@ router.put('/:id', function (req, res, next) {
 });
 
 /* DELETE USER BY ID*/
-router.delete('/user/:id', function (req, res, next) {
+router.delete('/:id', function (req, res, next) {
     
-    Place.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+    Place.findByIdAndRemove(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
