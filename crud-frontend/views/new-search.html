@@ -12,13 +12,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col form-group">
-                        <input type="text" class="form-control" placeholder="Hotel URL (from Booking)" ng-model="adversaryInput" />
+                        <input type="text" class="form-control" placeholder="Hotel URL (from Booking)" ng-model="hotelsUrl" />
                         <div class="row">
                             <a href="https://www.booking.com/" class="correct-url" target="_blank">Don't you know what is the correct hotel URL? Click here.</a>
                         </div>
                     </div>
                     <div class="col form-group">
-                        <input type="text" class="form-control" placeholder="Attractions URL (from TripAdvisor)" ng-model="gameInput" />
+                        <input type="text" class="form-control" placeholder="Attractions URL (from TripAdvisor)" ng-model="attractionsUrl" />
                         <div class="row">
                             <a href="https://www.tripadvisor.com/Attractions" class="correct-url" target="_blank">Don't you know what is the correct attractions URL? Click here.</a>
                         </div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="row">
                     <div class="col form-group">
-                        <button type="button" class="btn btn-secondary btn-lg btn-block button" ng-click="onNewRecordClicked()">Agregar</button>
+                        <button type="button" class="btn btn-secondary btn-lg btn-block button" ng-click="onAddNewPlaceClicked()">Agregar</button>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const axios = require("axios");
+const cheerio = require("cheerio");
 var Place = require('../model/place.js');
 
 /* GET ALL PLACES */
@@ -48,11 +50,20 @@ router.delete('/:id', function (req, res, next) {
     });
 });
 
-router.get('/name/:name', function(req, res, next) {
-    Place.findOne({place: req.params.name}, function(err, post) {
-        if (err) return next(err);
-        res.json(post);
+router.get('/name', function(req, res, next) {
+
+    axios.get(req.query.url).then(siteHtml => {
+        const $ = cheerio.load(siteHtml.data);
+
+        const placeName = $('#ss').attr('value');
+        
+        if (placeName) {
+            res.json({name: placeName});
+        } else {
+            res.json({name: ''});
+        }
     });
-})
+
+});
 
 module.exports = router;

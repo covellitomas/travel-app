@@ -7,7 +7,6 @@ const AHP = require('ahp');
 const hotelsURL = "https://www.booking.com/searchresults.html?label=gen173nr-1DCAEoggI46AdIM1gEaAyIAQGYATG4ARfIAQzYAQPoAQH4AQKIAgGoAgO4AqmblfMFwAIB&sid=335822906070625de1e89bdedfedd6e5&sb=1&sb_lp=1&src=index&src_elem=sb&error_url=https%3A%2F%2Fwww.booking.com%2Findex.html%3Flabel%3Dgen173nr-1DCAEoggI46AdIM1gEaAyIAQGYATG4ARfIAQzYAQPoAQH4AQKIAgGoAgO4AqmblfMFwAIB%3Bsid%3D335822906070625de1e89bdedfedd6e5%3Bsb_price_type%3Dtotal%26%3B&ss=Miami+Beach&is_ski_area=0&ssne=Miami+Beach&ssne_untouched=Miami+Beach&dest_id=20023182&dest_type=city&checkin_year=&checkin_month=&checkout_year=&checkout_month=&group_adults=2&group_children=0&no_rooms=1&b_h4u_keep_filters=&from_sf=1#map_opened-map-header-cta";
 const attractionsURL = "https://www.tripadvisor.com/Attractions-g34439-Activities-Miami_Beach_Florida.html";
 
-
 const filters = [{
     place: 'Miami',
     criterias: [   

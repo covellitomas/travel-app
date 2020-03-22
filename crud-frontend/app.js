@@ -27,3 +27,5 @@ app.validateUser = function($location) {
         $location.path('/');
     }
 }
+
+app.loading = true;

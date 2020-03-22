@@ -23,6 +23,7 @@
         <script src="controllers/loginController.js"></script>
         <script src="controllers/userChooseTableController.js"></script>
         <script src="controllers/newSearchController.js"></script>
+        <script src="controllers/loadingController.js"></script>
         
         <!-- Css -->
         <link rel="stylesheet" type="text/css" href="styles/styles.css">
@@ -30,7 +31,8 @@
         
     </head>
 
-    <body>
+    <body ng-controller="LoadingController">
+        <div class="alert alert-info" ng-show="loading">Loading...</div>
         <ng-view></ng-view>
     </body>
 
