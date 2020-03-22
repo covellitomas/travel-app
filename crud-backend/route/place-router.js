@@ -12,7 +12,7 @@ router.get('/all', function (req, res, next) {
 });
 
 /* SAVE NEW PLACE */
-router.post('/save', function(req, res, next) {
+router.post('/', function(req, res, next) {
     
     const newPlace = new Place(req.body);
     newPlace.save(req.body, function (err, rs) {
@@ -31,41 +31,9 @@ router.delete('/all', function (req, res, next) {
     });
 });
 
-/* SAVE USER */
-router.post('/user', function (req, res, next) {
-
-    const newUser = new Place(req.body);
-    newUser.save((err, item) => {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(item);
-        }
-    });
-
-});
-
-/* GET SINGLE USER BY ID */
-router.get('/:id', function (req, res, next) {
-    Game.findById(req.params.id, function (err, post) {
-        if (err) return next(err);
-        res.json(post);
-    });
-});
-
-/* GET SINGLE USER BY NAME AND PASSWORD */
-router.get('/user/:name/:password', function (req, res, next) {
-
-    Place.findByNameAndPassword(req.params.name, req.params.password, function (err, post) {
-        if (err) return next(err);
-        res.json(post);
-    });
-
-});
-
-/* UPDATE USER BY ID*/
-router.put('/:id', function (req, res, next) {
-    Game.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+/* GET SINGLE PLACE BY ID */
+router.get('/id/:id', function (req, res, next) {
+    Place.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
@@ -79,5 +47,12 @@ router.delete('/:id', function (req, res, next) {
         res.json(post);
     });
 });
+
+router.get('/name/:name', function(req, res, next) {
+    Place.findOne({place: req.params.name}, function(err, post) {
+        if (err) return next(err);
+        res.json(post);
+    });
+})
 
 module.exports = router;

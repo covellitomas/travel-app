@@ -9,16 +9,24 @@
 
         <div class="login-container">
 
-            <div class="row">
-                <div class="dropdown col-md-6">
-                    <button class="btn btn-secondary dropdown-toggle btn-lg btn-block" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Agregar lugares
-                    </button>
-                    
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button class="dropdown-item" type="button" ng-repeat="placeToSelect in placesToSelect" ng-click="onPlaceDropdownClicked(placeToSelect, $index)">
-                            {{placeToSelect}}
-                        </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col form-group">
+                        <input type="text" class="form-control" placeholder="Hotel URL (from Booking)" ng-model="adversaryInput" />
+                        <div class="row">
+                            <a href="https://www.booking.com/" target="_blank">Don't you know what is the correct hotel URL? Click here.</a>
+                        </div>
+                    </div>
+                    <div class="col form-group">
+                        <input type="text" class="form-control" placeholder="Attractions URL (from TripAdvisor)" ng-model="gameInput" />
+                        <div class="row">
+                            <a href="https://www.tripadvisor.com/Attractions" target="_blank">Don't you know what is the correct attractions URL? Click here.</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col form-group">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block button" ng-click="onNewRecordClicked()">Agregar</button>
                     </div>
                 </div>
             </div>
