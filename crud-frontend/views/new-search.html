@@ -42,7 +42,7 @@
                         
                         <tbody ng-repeat="place in placesToCompare">
                             <tr>
-                                <td>{{place}}</td>
+                                <td>{{place.name}}</td>
                             </tr>
                         </tbody>
 
@@ -59,7 +59,14 @@
                         
                         <tbody ng-repeat="criteria in criterias">
                             <tr>
-                                <td>{{criteria}}</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-9">{{criteria.name}}</div>
+                                        <div class="col-md-3">
+                                            <button type="button" class="btn btn-secondary" ng-click="onDeleteCriteriaClicked($index)">Eliminar</button>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
 

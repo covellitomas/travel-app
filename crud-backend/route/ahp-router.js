@@ -102,11 +102,10 @@ function _getPeso(val1, val2) {
     return val1 > val2 ? result : (1/result);
 }
 
-router.get('/hotels-criterias', function (req, res, next) {
+router.get('/hotel-criterias', function (req, res, next) {
+    const hotelCriterias = [];
 
-    const hotelsCriterias = [];
-
-    axios.get(hotelsURL).then(siteHtml => {
+    axios.get(req.query.hotelUrl).then(siteHtml => {
         const $ = cheerio.load(siteHtml.data);
 
         const allFilters = $('.filterbox');
@@ -132,11 +131,16 @@ router.get('/hotels-criterias', function (req, res, next) {
                     });
                 });
 
-                hotelsCriterias.push(newCriteria);
+                hotelCriterias.push(newCriteria);
             }   
         });
 
-        res.json(hotelsCriterias);
+        const placeName = $('#ss').attr('value');
+
+        res.json({
+            name: placeName,
+            criterias: hotelCriterias
+        });
     });
     
 });
@@ -145,7 +149,7 @@ router.get('/attractions-criterias', function (req, res, next) {
 
     const attractions = [];
 
-    axios.get(attractionsURL).then(siteHtml => {
+    axios.get(req.query.attractionsUrl).then(siteHtml => {
         const $ = cheerio.load(siteHtml.data);
 
         const allAttractions = $('._1HD-0hcQ').first().find('span');

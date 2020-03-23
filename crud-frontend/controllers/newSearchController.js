@@ -1,4 +1,4 @@
-app.controller('NewSearchController', ['$scope', '$window', 'PlaceService', 'CriteriaService' , function($scope, $window, PlaceService, CriteriaService) {
+app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', function($scope, PlaceService, AhpService) {
 
     var vm = $scope;
     init();
@@ -6,16 +6,31 @@ app.controller('NewSearchController', ['$scope', '$window', 'PlaceService', 'Cri
 
     function init() {
         vm.placesToCompare = [];
+        vm.criterias = [];
     }
 
     vm.onAddNewPlaceClicked = function() {
         vm.$emit('load');
         if (vm.hotelsUrl) {
-            PlaceService.getPlaceName(vm.hotelsUrl).then(place => {
-                vm.placesToCompare.push(place.name);
-                vm.$emit('unload');
+            AhpService.getHotelCriterias(vm.hotelsUrl).then(place => {
+                AhpService.getAttractionsCriterias(vm.attractionsUrl).then(attractionsCriterias => {
+                    place.criterias = place.criterias.concat(attractionsCriterias);
+                    vm.placesToCompare.push(place);
+
+                    place.criterias.forEach(criteria => {
+                        if (!vm.criterias.some(c => c.name === criteria.name)) {
+                            vm.criterias.push(criteria);
+                        }
+                    });
+
+                    vm.$emit('unload');
+                });
             });
         }
+    }
+
+    vm.onDeleteCriteriaClicked = function(index) {
+        vm.criterias.splice(index, 1);
     }
 
 }]);

@@ -1,6 +1,6 @@
 app.service('PlaceService', ['$http', function($http) {
 
-    function getPlaceName(url) {
+    /*function getPlaceName(url) {
 
         const config = {
             params: {
@@ -16,6 +16,6 @@ app.service('PlaceService', ['$http', function($http) {
      
     return {
         getPlaceName: getPlaceName
-    }
+    }*/
 
 }]);
