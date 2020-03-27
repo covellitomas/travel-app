@@ -7,48 +7,6 @@ const AHP = require('ahp');
 const hotelsURL = "https://www.booking.com/searchresults.html?label=gen173nr-1DCAEoggI46AdIM1gEaAyIAQGYATG4ARfIAQzYAQPoAQH4AQKIAgGoAgO4AqmblfMFwAIB&sid=335822906070625de1e89bdedfedd6e5&sb=1&sb_lp=1&src=index&src_elem=sb&error_url=https%3A%2F%2Fwww.booking.com%2Findex.html%3Flabel%3Dgen173nr-1DCAEoggI46AdIM1gEaAyIAQGYATG4ARfIAQzYAQPoAQH4AQKIAgGoAgO4AqmblfMFwAIB%3Bsid%3D335822906070625de1e89bdedfedd6e5%3Bsb_price_type%3Dtotal%26%3B&ss=Miami+Beach&is_ski_area=0&ssne=Miami+Beach&ssne_untouched=Miami+Beach&dest_id=20023182&dest_type=city&checkin_year=&checkin_month=&checkout_year=&checkout_month=&group_adults=2&group_children=0&no_rooms=1&b_h4u_keep_filters=&from_sf=1#map_opened-map-header-cta";
 const attractionsURL = "https://www.tripadvisor.com/Attractions-g34439-Activities-Miami_Beach_Florida.html";
 
-const filters = [{
-    place: 'Miami',
-    criterias: [   
-        {
-            "name": "3 stars",
-            "count": 241
-        },
-        {
-            "name": "Hilton Hotels & Resorts",
-            "count": 3
-        },
-        {
-            "name": "Tours",
-            "count": 1409
-        },
-        {
-            "name": "Nightlife",
-            "count": 1292
-        }
-    ]
-}, {
-    place: 'London',
-    criterias: [
-        {
-            "name": "3 stars",
-            "count": 432
-        },
-        {
-            "name": "Hilton Hotels & Resorts",
-            "count": 34
-        },
-        {
-            "name": "Tours",
-            "count": 545
-        },
-        {
-            "name": "Nightlife",
-            "count": 1456
-        }
-    ]}
-];
-
 const rankCriteria =
     [
         ['3 stars', 'Hilton Hotels & Resorts', 1/5],
@@ -117,7 +75,8 @@ router.get('/hotel-criterias', function (req, res, next) {
             if (criteria) {
                 const newCriteria = {
                     name: criteria,
-                    children: []
+                    children: [],
+                    count: 0
                 };
 
                 const categories = $(filterBox).find('.filteroptions .filter_item');
@@ -125,6 +84,7 @@ router.get('/hotel-criterias', function (req, res, next) {
                 categories.each((index, category) => {
                     const categoryText = $(category).find('.filter_label').text().replace(/\r?\n|\r/g, '');
                     const categoryCount = $(category).find('.filter_count').text().replace(/\r?\n|\r/g, '');
+                    newCriteria.count += categoryCount;
                     newCriteria.children.push({
                         name: categoryText,
                         count: categoryCount
@@ -168,29 +128,34 @@ router.get('/attractions-criterias', function (req, res, next) {
     });
 });
 
-router.get('/run', function (req, res, next) {
+router.post('/run', function (req, res, next) {
 
     const ahpContext = new AHP();
+    const places = req.body.data.places;
+    const criterias = req.body.data.criterias;
 
-    const places = filters.map(filter => filter.place);
-    console.log('Places: ', places);
-    ahpContext.addItems(places);
+    const placesNames = places.map(place => place.name);
+    console.log('Places: ', placesNames);
+    ahpContext.addItems(placesNames);
 
-    const criterias = filters[0].criterias.map(criteria => criteria.name);
-    console.log('Criterias: ', criterias);
-    ahpContext.addCriteria(criterias);
+    const criteriasNames = criterias.map(criteria => criteria.name);
+    console.log('Criterias: ', criteriasNames);
+    ahpContext.addCriteria(criteriasNames);
 
     criterias.forEach(criteria => {
 
         const matrix = [];
         
-        filters.forEach((place, i) => {
+        places.forEach((place, i) => {
             
-            const count = place.criterias.find(placeCriteria => placeCriteria.name === criteria).count;
+            const placeCriteria = place.criterias.find(placeCriteria => placeCriteria.name === criteria);
+            const count = placeCriteria ? placeCriteria.count : 0;
             
-            for (let index = i+1; index < filters.length; index++) {
-                const otherPlace = filters[index];
-                const otherPlaceCount = otherPlace.criterias.find(placeCriteria => placeCriteria.name === criteria).count;
+            for (let index = i+1; index < places.length; index++) {
+                const otherPlace = places[index];
+
+                const otherPlaceSameCriteria = otherPlace.criterias.find(placeCriteria => placeCriteria.name === criteria);
+                const otherPlaceCount = otherPlaceSameCriteria ? otherPlaceSameCriteria.count : 0;
                 
                 const peso = _getPeso(count, otherPlaceCount);
 

@@ -73,10 +73,45 @@
                     </table>
                 </div>
             </div>
+
+            <div class="row">
+                <table id="rankCriteriaTable" class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Places / Criterias</th>
+                        <th scope="col" ng-repeat="criteria in criterias">
+                            {{criteria.name}}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="criteria in criterias">
+                            <th scope="row" ng-init="colIndex = $index">{{criteria.name}}</th>
+                            <td ng-repeat="criteria in criterias">
+                                <div class="dropdown">
+
+                                    <select ng-if="colIndex === $index" class="form-control" disabled>
+                                        <option value="{{null}}">Same importance</option>
+                                    </select>
+                                      
+                                    <select ng-if="colIndex !== $index" class="form-control">
+                                        <option ng-repeat="rankCriteria in rankCriterias" value="{{rankCriteria.factor}}">{{rankCriteria.description}}</option>
+                                    </select>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
         </div>
 
         <div class="container">
-            <button type="button" class="btn btn-secondary btn-lg btn-block" ng-click="onSaveTableClicked()">Avanzar</button>
+            <button type="button" class="btn btn-secondary btn-lg btn-block" ng-click="onGetTableContentClicked()">Get table content</button>
+        </div>
+
+        <div class="container">
+            <button type="button" class="btn btn-secondary btn-lg btn-block" ng-show="showRunAlgorithmButton" ng-click="onRunAlgorithmClicked()">Run algorithm</button>
         </div>
 
     </body>
