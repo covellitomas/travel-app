@@ -5,8 +5,8 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', f
     //app.validateUser($location);
 
     function init() {
-        vm.placesToCompare = [{name: 'London'}, {name: 'Paris'}];
-        vm.criterias = [{name: 'Stars'}, {name: 'Amenities'}, {name: 'Distance'}];
+        vm.placesToCompare = [];
+        vm.criterias = [];
         vm.rankCriterias = [
             {factor: -1, description: 'Select importance...'},
             {factor: 1/9, description: 'Way less important'},
@@ -23,17 +23,20 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', f
         var oTable = document.getElementById('rankCriteriaTable');
         var rowLength = oTable.rows.length;
 
-        for (i = 0; i < rowLength; i++){
-            var oCells = oTable.rows.item(i).cells;
-            var cellLength = oCells.length;
+        const matrix = [];
+        for (i = 1; i < rowLength; i++) {
 
-            for(var j = 0; j < cellLength; j++){
-                const item = oCells.item(j).querySelector("select");
+            var oCells = oTable.rows.item(i).cells;
+            var cellLength = oCells.length-1;
+
+            for(var j = i; j < cellLength; j++) {
+
+                const item = oCells.item(j+1).querySelector("select");
                 if (item) {
-                    const cellVal = item.options[item.selectedIndex].value;
+                    const cellVal = +item.options[item.selectedIndex].value;
 
                     if (cellVal && cellVal != -1) {
-                        alert(cellVal);
+                        matrix.push([vm.criterias[i-1].name, vm.criterias[j].name, cellVal]);
                     } else if (cellVal == -1) {
                         return alert('Please fill all the table cells to continue...');
                     }
@@ -41,6 +44,7 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', f
                 }
             }
         }
+        const x = 0;
     }
 
     vm.onAddNewPlaceClicked = function() {

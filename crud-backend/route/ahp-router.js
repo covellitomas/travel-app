@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const axios = require("axios");
+const fetch = require('node-fetch');
 const cheerio = require("cheerio");
 const AHP = require('ahp');
 
@@ -63,8 +63,12 @@ function _getPeso(val1, val2) {
 router.get('/hotel-criterias', function (req, res, next) {
     const hotelCriterias = [];
 
-    axios.get(req.query.hotelUrl).then(siteHtml => {
-        const $ = cheerio.load(siteHtml.data);
+
+    fetch(req.query.hotelUrl).then(
+        response => response.text()
+    ).then(siteHtml => {
+
+        const $ = cheerio.load(siteHtml);
 
         const allFilters = $('.filterbox');
 
@@ -84,7 +88,7 @@ router.get('/hotel-criterias', function (req, res, next) {
                 categories.each((index, category) => {
                     const categoryText = $(category).find('.filter_label').text().replace(/\r?\n|\r/g, '');
                     const categoryCount = $(category).find('.filter_count').text().replace(/\r?\n|\r/g, '');
-                    newCriteria.count += categoryCount;
+                    newCriteria.count += +categoryCount;
                     newCriteria.children.push({
                         name: categoryText,
                         count: categoryCount
@@ -101,6 +105,7 @@ router.get('/hotel-criterias', function (req, res, next) {
             name: placeName,
             criterias: hotelCriterias
         });
+        console.log('SALEE');
     });
     
 });
@@ -109,8 +114,10 @@ router.get('/attractions-criterias', function (req, res, next) {
 
     const attractions = [];
 
-    axios.get(req.query.attractionsUrl).then(siteHtml => {
-        const $ = cheerio.load(siteHtml.data);
+    fetch(req.query.attractionsUrl).then(
+        response => response.text()
+    ).then(siteHtml => {
+        const $ = cheerio.load(siteHtml);
 
         const allAttractions = $('._1HD-0hcQ').first().find('span');
         
