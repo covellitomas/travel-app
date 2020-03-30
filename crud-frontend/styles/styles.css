@@ -1,3 +1,8 @@
+.loading-container{
+    position: relative !important;
+}
+
+
 .login-container{
     margin-top: 4%;
     margin-left: 5%;
@@ -12,18 +17,18 @@
     position: absolute;
     width: 125px;
     margin-top: 13%;
-    background: #282726;
+    background: #23374d;
     border-radius: 4.5rem;
     padding: 5%;
 }
 .login-form-1{
     padding: 9%;
-    background:#282726;
+    background:#23374d;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
 .error-field {
-    color:#fff;
+    color:#eeeeee;
     font-size: small;
 }
 
@@ -34,7 +39,7 @@
 }
 .login-form-2{
     padding: 9%;
-    background: #009faf;
+    background: #1089ff;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 .login-form-2 h3{
@@ -45,20 +50,20 @@
 .btnSubmit{
     font-weight: 600;
     width: 50%;
-    color: #282726;
+    color: #23374d;
     background-color: #fff;
     border: none;
     border-radius: 1.5rem;
     padding:2%;
 }
 .btnForgetPwd{
-    color: #fff;
+    color: #eeeeee;
     font-weight: 600;
     text-decoration: none;
 }
 .btnForgetPwd:hover{
     text-decoration:none;
-    color:#fff;
+    color:#eeeeee;
 }
 
 .table td {
@@ -72,4 +77,54 @@
 
 .correct-url {
     margin-left: 11%;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
+
+footer {
+    position: absolute;
+    right: 0;bottom:0;left:0;
+}
+
+.palette-dark {
+    background-color: #23374d !important;
+    color: #fff;
+}
+
+body {
+    background-color: #eeeeee;
+}
+
+
+.form-control-ta {
+    background-color: #eeeeee;
+}
+
+.container-ta {
+    background-color: #e5e5e5;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 1%;
+}
+
+
+.table-ta{
+    background-color: #fff;
+}
+
+.table-bordered td, .table-bordered th {
+    border: none;
+}
+
+
+.new-search-container{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1%;
 }

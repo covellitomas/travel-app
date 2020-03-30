@@ -1,6 +1,7 @@
 var app = angular.module("GameApp", ['ngRoute']);
 
 app.userLogged = undefined;
+app.usrValid = true;
 
 app.config(function($routeProvider) {
 

@@ -28,12 +28,34 @@
         <!-- Css -->
         <link rel="stylesheet" type="text/css" href="styles/styles.css">
         <link rel="stylesheet" type="text/css" href="styles/user-choose-table.css">
+        <link rel="stylesheet" type="text/css" href="styles/airplane.css">
         
     </head>
 
-    <body ng-controller="LoadingController">
-        <div class="alert alert-info" ng-show="loading">Loading...</div>
-        <ng-view></ng-view>
+    
+    <body>
+        <nav class="navbar navbar-dark palette-dark">
+            <a class="navbar-brand" href="/">
+                <img src="https://img.pngio.com/travel-png-images-transparent-free-download-pngmartcom-travel-png-free-download-3344_2453.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                TravelApp
+            </a>
+        </nav>
     </body>
+
+
+    <body ng-controller="LoadingController">
+        <div style="position:relative;">
+            <div class="alert alert-info alert-ta" ng-show="loading">Loading...</div>
+            <div ng-include="'views/airplane-loader.html'" ng-show="loading"></div>
+            <ng-view></ng-view>
+        </div>
+    </body>
+
+
+    <footer id="sticky-footer" class="py-4 palette-dark text-white-50">
+        <div class="container text-center">
+          <small>Copyright &copy; TravelApp</small>
+        </div>
+    </footer>
 
 </html>

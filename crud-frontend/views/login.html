@@ -6,58 +6,52 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="/">
-                <img src="https://img.pngio.com/travel-png-images-transparent-free-download-pngmartcom-travel-png-free-download-3344_2453.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                TravelApp
-            </a>
-        </nav>
+        <form name="myForm" [formGroup]="form"> 
+            <div class="login-container"></div>
+                <div class="row">
+                    
+                    <div class="col-md-6 login-form-1">
+                        <h3>Iniciar Sesión </h3>
+                                
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Usuario" ng-model="loginUsername"/>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Contraseña" ng-model="loginPassword" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Ingresar" ng-click="onLoginClicked()"/>
+                        </div>
+                        <p class="error-field" ng-show="!userLogged && myForm.$submitted"> * Por favor, ingresar un usuario y contraseña válidos </p>
+                                
+                    </div>
+                    
+                    <div class="col-md-6 login-form-2">
+                        <div class="login-logo">
+                            <img src="https://img.pngio.com/travel-png-images-transparent-free-download-pngmartcom-travel-png-free-download-3344_2453.png" alt=""/>
+                        </div>
+                        
+                        <h3>Registrarse</h3>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Usuario" ng-model="registerUsername" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Contraseña" ng-model="registerPassword" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Registrarse" ng-click="onRegisterClicked()" />
+                        </div>
+                        
+                    </div>
 
-        <div class="login-container">
-            <div class="row">
-                
-                <div class="col-md-6 login-form-1">
-                    <h3>Iniciar Sesión </h3>
-                            
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Usuario" ng-model="loginUsername" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Contraseña" ng-model="loginPassword" />
-                    </div>
-                    
-                    <p class="error-field" ng-show="!userLogged"> * Por favor, ingresar un usuario y contraseña válidos </p>
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="Ingresar" ng-click="onLoginClicked()" />
-                    </div>
-                            
                 </div>
-                
-                <div class="col-md-6 login-form-2">
-                    <div class="login-logo">
-                        <img src="https://img.pngio.com/travel-png-images-transparent-free-download-pngmartcom-travel-png-free-download-3344_2453.png" alt=""/>
-                    </div>
-                    
-                    <h3>Registrarse</h3>
-                    
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Usuario" ng-model="registerUsername" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Contraseña" ng-model="registerPassword" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="Registrarse" ng-click="onRegisterClicked()" />
-                    </div>
-                    
-                </div>
-
             </div>
-        </div>
-
+        </form>
     </body>
 
 </html>

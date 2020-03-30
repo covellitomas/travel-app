@@ -10,8 +10,11 @@ app.controller("LoginController", ['$scope', '$location', 'UserService', functio
         UserService.getUser(loginUsername, loginPassword).then(function(user) {
             if (user) {
                 app.userLogged = user;
+                app.usrValid = true;
                 $location.path('/user-choose-table/');
             }
+            else
+                app.usrValid = false;
         });
     }
 

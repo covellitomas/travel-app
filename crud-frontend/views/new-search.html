@@ -6,35 +6,32 @@
     </head>
 
     <body>
-
-        <div class="login-container">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col form-group">
-                        <input type="text" class="form-control" placeholder="Hotel URL (from Booking)" ng-model="hotelsUrl" />
-                        <div class="row">
-                            <a href="https://www.booking.com/" class="correct-url" target="_blank">Don't you know what is the correct hotel URL? Click here.</a>
-                        </div>
-                    </div>
-                    <div class="col form-group">
-                        <input type="text" class="form-control" placeholder="Attractions URL (from TripAdvisor)" ng-model="attractionsUrl" />
-                        <div class="row">
-                            <a href="https://www.tripadvisor.com/Attractions" class="correct-url" target="_blank">Don't you know what is the correct attractions URL? Click here.</a>
-                        </div>
+        <div class="container container-ta">
+            <div class="row">
+                <div class="col form-group">
+                    <input type="text" class="form-control" placeholder="Hotel URL (from Booking)" ng-model="hotelsUrl" />
+                    <div class="row">
+                        <a href="https://www.booking.com/" class="correct-url" target="_blank">Don't you know what is the correct hotel URL? Click here.</a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col form-group">
-                        <button type="button" class="btn btn-secondary btn-lg btn-block button" ng-click="onAddNewPlaceClicked()">Agregar</button>
+                <div class="col form-group">
+                    <input type="text" class="form-control" placeholder="Attractions URL (from TripAdvisor)" ng-model="attractionsUrl" />
+                    <div class="row">
+                        <a href="https://www.tripadvisor.com/Attractions" class="correct-url" target="_blank">Don't you know what is the correct attractions URL? Click here.</a>
                     </div>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col form-group">
+                    <button type="button" class="btn btn-secondary btn-lg btn-block button" ng-click="onAddNewPlaceClicked()">Agregar</button>
+                </div>
+            </div>
+        </div>
+        <div class="new-search-container">
             <div class="row">
                 <div class="col-md-6">
-                    <table class="table table-hover table-bordered">
-                        <thead class="thead-dark">
+                    <table class="table table-hover table-bordered table-ta">
+                        <thead class="palette-dark">
                             <tr>
                                 <th scope="col">Lugares</th>
                             </tr>
@@ -50,8 +47,8 @@
                 </div>
 
                 <div class="col-md-6">
-                    <table class="table table-hover table-bordered">
-                        <thead class="thead-dark">
+                    <table class="table table-hover table-bordered table-ta">
+                        <thead class="palette-dark table-border">
                             <tr>
                                 <th scope="col">Criterios</th>
                             </tr>
@@ -75,8 +72,8 @@
             </div>
 
             <div class="row">
-                <table id="rankCriteriaTable" class="table table-hover table-bordered">
-                    <thead class="thead-dark">
+                <table id="rankCriteriaTable" class="table table-hover table-bordered table-ta">
+                    <thead class="palette-dark">
                       <tr>
                         <th scope="col">Places / Criterias</th>
                         <th scope="col" ng-repeat="criteria in criterias">

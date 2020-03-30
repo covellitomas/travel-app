@@ -1,0 +1,251 @@
+*,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+
+        .flex-container {
+            display: flex;
+        }
+
+        .content {
+            position: absolute;
+            height: 45px;
+            top:0; 
+            right:0;
+        }
+
+        #airplane-take-off {
+            -webkit-transform-origin: bottom center;
+            transform-origin: bottom center;
+            -webkit-animation-name: take-off;
+            animation-name: take-off;
+            -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            
+        }
+
+        @-webkit-keyframes take-off {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate(-40px, 0) rotate(0deg);
+                transform: translate(-40px, 0) rotate(0deg);
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            25% {
+                -webkit-transform: translate(0, 0) rotate(0deg);
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            30% {
+                -webkit-transform: translate(8px, -1px) rotate(-2deg);
+                transform: translate(8px, -1px) rotate(-2deg);
+            }
+
+            35% {
+                -webkit-transform: translate(16px, -3px) rotate(-4deg);
+                transform: translate(16px, -3px) rotate(-4deg);
+            }
+
+            40% {
+                opacity: 1;
+                -webkit-transform: translate(24px, -5px) rotate(-7deg);
+                transform: translate(24px, -5px) rotate(-7deg);
+            }
+
+            45% {
+                -webkit-transform: translate(32px, -8px) rotate(-10deg);
+                transform: translate(32px, -8px) rotate(-10deg);
+            }
+
+            50% {
+                opacity: 0;
+                -webkit-transform: translate(40px, -12px) rotate(-16deg);
+                transform: translate(40px, -12px) rotate(-16deg);
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate(40px, -12px) rotate(-16deg);
+                transform: translate(40px, -12px) rotate(-16deg);
+            }
+        }
+
+        @keyframes take-off {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate(-40px, 0) rotate(0deg);
+                transform: translate(-40px, 0) rotate(0deg);
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            25% {
+                -webkit-transform: translate(0, 0) rotate(0deg);
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            30% {
+                -webkit-transform: translate(8px, -1px) rotate(-2deg);
+                transform: translate(8px, -1px) rotate(-2deg);
+            }
+
+            35% {
+                -webkit-transform: translate(16px, -3px) rotate(-4deg);
+                transform: translate(16px, -3px) rotate(-4deg);
+            }
+
+            40% {
+                opacity: 1;
+                -webkit-transform: translate(24px, -5px) rotate(-7deg);
+                transform: translate(24px, -5px) rotate(-7deg);
+            }
+
+            45% {
+                -webkit-transform: translate(32px, -8px) rotate(-10deg);
+                transform: translate(32px, -8px) rotate(-10deg);
+            }
+
+            50% {
+                opacity: 0;
+                -webkit-transform: translate(40px, -12px) rotate(-16deg);
+                transform: translate(40px, -12px) rotate(-16deg);
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate(40px, -12px) rotate(-16deg);
+                transform: translate(40px, -12px) rotate(-16deg);
+            }
+        }
+
+        #airplane-landing {
+            -webkit-transform-origin: bottom center;
+            transform-origin: bottom center;
+            -webkit-animation-name: landing;
+            animation-name: landing;
+            -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            
+        }
+
+        @-webkit-keyframes landing {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate(-40px, -12px) rotate(16deg);
+                transform: translate(-40px, -12px) rotate(16deg);
+            }
+
+            50% {
+                opacity: 0;
+                -webkit-transform: translate(-40px, -12px) rotate(16deg);
+                transform: translate(-40px, -12px) rotate(16deg);
+            }
+
+            55% {
+                -webkit-transform: translate(-32px, -8px) rotate(10deg);
+                transform: translate(-32px, -8px) rotate(10deg);
+            }
+
+            60% {
+                opacity: 1;
+                -webkit-transform: translate(-24px, -5px) rotate(7deg);
+                transform: translate(-24px, -5px) rotate(7deg);
+            }
+
+            65% {
+                -webkit-transform: translate(-16px, -3px) rotate(4deg);
+                transform: translate(-16px, -3px) rotate(4deg);
+            }
+
+            70% {
+                -webkit-transform: translate(-8px, -1px) rotate(2deg);
+                transform: translate(-8px, -1px) rotate(2deg);
+            }
+
+            75% {
+                -webkit-transform: translate(0, 0) rotate(0deg);
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate(40px, 0) rotate(0deg);
+                transform: translate(40px, 0) rotate(0deg);
+            }
+        }
+
+        @keyframes landing {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate(-40px, -12px) rotate(16deg);
+                transform: translate(-40px, -12px) rotate(16deg);
+            }
+
+            50% {
+                opacity: 0;
+                -webkit-transform: translate(-40px, -12px) rotate(16deg);
+                transform: translate(-40px, -12px) rotate(16deg);
+            }
+
+            55% {
+                -webkit-transform: translate(-32px, -8px) rotate(10deg);
+                transform: translate(-32px, -8px) rotate(10deg);
+            }
+
+            60% {
+                opacity: 1;
+                -webkit-transform: translate(-24px, -5px) rotate(7deg);
+                transform: translate(-24px, -5px) rotate(7deg);
+            }
+
+            65% {
+                -webkit-transform: translate(-16px, -3px) rotate(4deg);
+                transform: translate(-16px, -3px) rotate(4deg);
+            }
+
+            70% {
+                -webkit-transform: translate(-8px, -1px) rotate(2deg);
+                transform: translate(-8px, -1px) rotate(2deg);
+            }
+
+            75% {
+                -webkit-transform: translate(0, 0) rotate(0deg);
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate(40px, 0) rotate(0deg);
+                transform: translate(40px, 0) rotate(0deg);
+            }
+        }
+
+
+        .alert-ta {
+            margin-bottom: 0;
+        }
+        
