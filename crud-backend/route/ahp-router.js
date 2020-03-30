@@ -155,30 +155,30 @@ router.post('/run', function (req, res, next) {
         
         places.forEach((place, i) => {
             
-            const placeCriteria = place.criterias.find(placeCriteria => placeCriteria.name === criteria);
+            const placeCriteria = place.criterias.find(placeCriteria => placeCriteria.name === criteria.name);
             const count = placeCriteria ? placeCriteria.count : 0;
             
             for (let index = i+1; index < places.length; index++) {
                 const otherPlace = places[index];
 
-                const otherPlaceSameCriteria = otherPlace.criterias.find(placeCriteria => placeCriteria.name === criteria);
+                const otherPlaceSameCriteria = otherPlace.criterias.find(placeCriteria => placeCriteria.name === criteria.name);
                 const otherPlaceCount = otherPlaceSameCriteria ? otherPlaceSameCriteria.count : 0;
-                
                 const peso = _getPeso(count, otherPlaceCount);
 
-                matrix.push([place.place, otherPlace.place, peso]);              
+                matrix.push([place.name, otherPlace.name, peso]);           
             }
 
         });
 
-        ahpContext.rankCriteriaItem(criteria, matrix);
-        console.log(matrix);
+        ahpContext.rankCriteriaItem(criteria.name, matrix);
+        console.log('MATRIX: ', criteria.name, matrix);
 
     });
 
-    ahpContext.rankCriteria(rankCriteria);
+    ahpContext.rankCriteria(req.body.data.rankCriterias);
 
     let output = ahpContext.run();
+    console.log('OUTPUT: ', output);
     res.json(output.rankedScoreMap);
     
 });

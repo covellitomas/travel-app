@@ -19,7 +19,7 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', f
         ];
     }
 
-    vm.onGetTableContentClicked = function() {
+    function getRankCriterias() {
         var oTable = document.getElementById('rankCriteriaTable');
         var rowLength = oTable.rows.length;
 
@@ -44,7 +44,7 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', f
                 }
             }
         }
-        const x = 0;
+        return matrix;
     }
 
     vm.onAddNewPlaceClicked = function() {
@@ -72,8 +72,17 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', f
             vm.$emit('load');
             AhpService.runAlgorithm({
                 places: vm.placesToCompare,
-                criterias: vm.criterias
-            }).then((results) => results.data);
+                criterias: vm.criterias,
+                rankCriterias: getRankCriterias()
+            }).then((results) => {
+                const resultsAsArray = Object.keys(results).map((key) => ({place: key, value: results[key]}));
+
+                const sortedResults = resultsAsArray.sort(function (a, b) {
+                    return -(a.value - b.value);
+                });
+
+                alert(sortedResults);
+            });
         }
     }
 
