@@ -1,10 +1,19 @@
-app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', function($scope, PlaceService, AhpService) {
+app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', 'CriteriaService', function($scope, PlaceService, AhpService, CriteriaService) {
 
     var vm = $scope;
     init();
     //app.validateUser($location);
 
     function init() {
+
+        PlaceService.getAllPlacesNames().then((placesNames) => {
+            vm.allPlaces = placesNames;
+        });
+
+        CriteriaService.getAllCriterias().then((criterias) => {
+            vm.allCriterias = criterias;
+        });
+
         vm.placesToCompare = [];
         vm.criterias = [];
         vm.rankCriterias = [
@@ -55,10 +64,22 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', f
                     place.criterias = place.criterias.concat(attractionsCriterias);
                     vm.placesToCompare.push(place);
 
+                    const newCriterias = [];
                     place.criterias.forEach(criteria => {
                         if (!vm.criterias.some(c => c.name === criteria.name)) {
+                            newCriterias.push(criteria);
                             vm.criterias.push(criteria);
                         }
+                    });
+
+                    PlaceService.savePlace(place).then((savedPlace => {
+                        const x = 0;
+                    }));
+
+                    newCriterias.forEach(criteria => {
+                        CriteriaService.saveCriteria(criteria).then((savedCriteria) => {
+                            const x = 0;
+                        });
                     });
 
                     vm.$emit('unload');

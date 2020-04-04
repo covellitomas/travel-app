@@ -11,13 +11,13 @@
                 <div class="col form-group">
                     <input type="text" class="form-control" placeholder="Hotel URL (from Booking)" ng-model="hotelsUrl" />
                     <div class="row">
-                        <a href="https://www.booking.com/" class="correct-url" target="_blank">Don't you know what is the correct hotel URL? Click here.</a>
+                        <a href="https://www.booking.com/index.es-ar.html?label=gen173nr-1DCAEoggI46AdIM1gEaAyIAQGYASy4ARfIAQzYAQPoAQGIAgGoAgO4ArewjfQFwAIB;sid=b15aa771fe5e995e25dfe861d9e48c85;keep_landing=1&sb_price_type=total&" class="correct-url" target="_blank">Don't you know what is the correct hotel URL? Click here.</a>
                     </div>
                 </div>
                 <div class="col form-group">
                     <input type="text" class="form-control" placeholder="Attractions URL (from TripAdvisor)" ng-model="attractionsUrl" />
                     <div class="row">
-                        <a href="https://www.tripadvisor.com/Attractions" class="correct-url" target="_blank">Don't you know what is the correct attractions URL? Click here.</a>
+                        <a href="https://www.tripadvisor.com.ar/Attractions" class="correct-url" target="_blank">Don't you know what is the correct attractions URL? Click here.</a>
                     </div>
                 </div>
             </div>
@@ -26,6 +26,29 @@
                     <button type="button" class="btn btn-secondary btn-lg btn-block button" ng-click="onAddNewPlaceClicked()">Agregar</button>
                 </div>
             </div>
+
+
+            <!-- Default dropright button -->
+            <div class="btn-group dropright">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Lugares
+                </button>
+                <div class="dropdown-menu">
+                    <span class="dropdown-item" ng-repeat="place in allPlaces">
+                        {{place.name}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+            </div>
+
         </div>
         <div class="new-search-container">
             <div class="row">

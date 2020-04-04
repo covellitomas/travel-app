@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const criteriaSchema = mongoose.Schema({
-    id: String,
-    description: String,
-    parentId: String
+    name: String,
+    children: []
 });
 
 module.exports = mongoose.model('Criteria', criteriaSchema);

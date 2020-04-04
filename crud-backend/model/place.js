@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const placeSchema = mongoose.Schema({
-    id: String,
-    place: String,
-    hotels: Object
+    name: String,
+    criterias: []
 });
 
 module.exports = mongoose.model('Place', placeSchema);
