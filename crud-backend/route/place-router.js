@@ -7,7 +7,7 @@ var Place = require('../model/place.js');
 /* GET ALL PLACES */
 router.get('/all', function (req, res, next) {
 
-    Place.find({}, 'name', function(err, data){
+    Place.find({}, function(err, data){
         if(err) return next(err);
         res.send(data);
     });

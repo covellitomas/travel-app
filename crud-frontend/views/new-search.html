@@ -27,25 +27,22 @@
                 </div>
             </div>
 
-
-            <!-- Default dropright button -->
-            <div class="btn-group dropright">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Lugares
-                </button>
-                <div class="dropdown-menu">
-                    <span class="dropdown-item" ng-repeat="place in allPlaces">
-                        {{place.name}}
-                    </span>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Lugares:</label>
+                    <select class="container-fluid" ng-model="selectedPlace" ng-options="place.name for place in allPlaces" ng-change="onPlaceOptionClicked()"></select>
+                    <!-- <select class="container-fluid">
+                        <option ng-repeat="place in allPlaces">{{place.name}}</option>
+                    </select> -->
                 </div>
-            </div>
 
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-                <div id="myDropdown" class="dropdown-content">
-                  <a href="#">Link 1</a>
-                  <a href="#">Link 2</a>
-                  <a href="#">Link 3</a>
+                <div class="col-md-6 container-fluid">
+                    <label>Criterios:</label>
+                    <select class="container-fluid" ng-model="selectedCriteria" ng-change="onCriteriaOptionClicked()">
+                        <optgroup ng-repeat="criteria in allCriterias" label="{{criteria.name}}">
+                            <option ng-repeat="criteriaChild in criteria.children">{{criteriaChild.name}}</option>
+                        </optgroup>
+                    </select>
                 </div>
             </div>
 

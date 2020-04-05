@@ -155,13 +155,13 @@ router.post('/run', function (req, res, next) {
         
         places.forEach((place, i) => {
             
-            const placeCriteria = place.criterias.find(placeCriteria => placeCriteria.name === criteria.name);
+            const placeCriteria = findCriteria(place, criteria);
             const count = placeCriteria ? placeCriteria.count : 0;
             
             for (let index = i+1; index < places.length; index++) {
                 const otherPlace = places[index];
 
-                const otherPlaceSameCriteria = otherPlace.criterias.find(placeCriteria => placeCriteria.name === criteria.name);
+                const otherPlaceSameCriteria = findCriteria(otherPlace, criteria);
                 const otherPlaceCount = otherPlaceSameCriteria ? otherPlaceSameCriteria.count : 0;
                 const peso = _getPeso(count, otherPlaceCount);
 
@@ -171,17 +171,33 @@ router.post('/run', function (req, res, next) {
         });
 
         ahpContext.rankCriteriaItem(criteria.name, matrix);
-        console.log('MATRIX: ', criteria.name, matrix);
 
     });
 
     ahpContext.rankCriteria(req.body.data.rankCriterias);
 
     let output = ahpContext.run();
-    console.log('OUTPUT: ', output);
+    console.log('OUTPUT: ', output.rankedScoreMap);
     res.json(output.rankedScoreMap);
     
 });
+
+function findCriteria(place, criteria) {
+
+    for (const placeIndex in place.criterias) {
+        const placeCriteria = place.criterias[placeIndex];
+        if (placeCriteria.name === criteria.name) {
+            return placeCriteria;
+        } else {
+            for (const childIndex in placeCriteria.children) {
+                const childCriteria = placeCriteria.children[childIndex];
+                if (childCriteria.name === criteria.name) {
+                    return childCriteria;
+                }
+            }
+        }
+    }
+}
 
 router.get('/picture', function (req, res, next) {
 

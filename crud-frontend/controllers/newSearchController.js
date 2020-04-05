@@ -62,24 +62,21 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
             AhpService.getHotelCriterias(vm.hotelsUrl).then(place => {
                 AhpService.getAttractionsCriterias(vm.attractionsUrl).then(attractionsCriterias => {
                     place.criterias = place.criterias.concat(attractionsCriterias);
-                    vm.placesToCompare.push(place);
 
-                    const newCriterias = [];
+                    if (!vm.allPlaces.some(p => p.name === place.name)) {
+                        vm.allPlaces.push(place);
+                        PlaceService.savePlace(place).then((savedPlace => {
+                            const x = 0;
+                        }));
+                    }
+
                     place.criterias.forEach(criteria => {
                         if (!vm.criterias.some(c => c.name === criteria.name)) {
-                            newCriterias.push(criteria);
-                            vm.criterias.push(criteria);
+                            vm.allCriterias.push(criteria);
+                            CriteriaService.saveCriteria(criteria).then((savedCriteria) => {
+                                const x = 0;
+                            });
                         }
-                    });
-
-                    PlaceService.savePlace(place).then((savedPlace => {
-                        const x = 0;
-                    }));
-
-                    newCriterias.forEach(criteria => {
-                        CriteriaService.saveCriteria(criteria).then((savedCriteria) => {
-                            const x = 0;
-                        });
                     });
 
                     vm.$emit('unload');
@@ -102,13 +99,27 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
                     return -(a.value - b.value);
                 });
 
-                alert(sortedResults);
+                vm.$emit('unload');
+                alert("Los resultados son: " + JSON.stringify(results));
             });
         }
     }
 
     vm.onDeleteCriteriaClicked = function(index) {
         vm.criterias.splice(index, 1);
+    }
+
+    vm.onCriteriaOptionClicked = function() {
+        let criteriaSelected;
+        vm.allCriterias.some(criteria => {
+            criteriaSelected = criteria.children.find(child => child.name === vm.selectedCriteria);
+            return !!criteriaSelected;
+        });
+        vm.criterias.push(criteriaSelected);
+    }
+
+    vm.onPlaceOptionClicked = function() {
+        vm.placesToCompare.push(vm.selectedPlace);
     }
 
 }]);
