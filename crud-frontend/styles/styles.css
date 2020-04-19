@@ -147,3 +147,12 @@ body {
 .optionChild {
     padding-left: 15px;
 }
+
+.defaultColumn {
+    background-color: #e5e5e5;
+}
+
+
+.stickyFooter {
+    position: fixed;
+}

@@ -2,6 +2,11 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
 
     var vm = $scope;
     init();
+
+    var finderVisible = true;
+    var criteriasVisible = true;
+    var tableVisible = false;
+
     //app.validateUser($location);
 
     function init() {
@@ -122,4 +127,8 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
         vm.placesToCompare.push(vm.selectedPlace);
     }
 
+
+    vm.onGetTableContentClicked = function() {
+        this.tableVisible = true;
+    }
 }]);
