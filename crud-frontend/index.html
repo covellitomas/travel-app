@@ -25,6 +25,8 @@
         <script src="controllers/userChooseTableController.js"></script>
         <script src="controllers/newSearchController.js"></script>
         <script src="controllers/loadingController.js"></script>
+        <script src="controllers/historyController.js"></script>
+        <script src="controllers/ahpResultsController.js"></script>
         
         <!-- Css -->
         <link rel="stylesheet" type="text/css" href="styles/styles.css">
@@ -44,18 +46,18 @@
     </body>
 
 
-    <body ng-controller="LoadingController">
+    <body class="main-content" ng-controller="LoadingController">
         <div style="position:relative;">
             <div class="alert alert-info alert-ta" ng-show="loading">Loading...</div>
             <div ng-include="'views/airplane-loader.html'" ng-show="loading"></div>
             <ng-view></ng-view>
         </div>
-
-        <footer id="sticky-footer" class="py-4 palette-dark text-white-50 stickyFooter">
-            <div class="container text-center">
-              <small>Copyright &copy; Dónde voy?</small>
-            </div>
-        </footer>
     </body>
+
+    <footer id="sticky-footer" class="py-4 palette-dark text-white-50 stickyFooter">
+        <div class="container text-center">
+          <small>Copyright &copy; Dónde voy?</small>
+        </div>
+    </footer>
 
 </html>

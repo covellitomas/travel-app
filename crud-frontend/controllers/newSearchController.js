@@ -1,13 +1,9 @@
-app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', 'CriteriaService', function($scope, PlaceService, AhpService, CriteriaService) {
+app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', 'CriteriaService', '$location', function($scope, PlaceService, AhpService, CriteriaService, $location) {
 
     var vm = $scope;
     init();
 
-    var finderVisible = true;
-    var criteriasVisible = true;
-    var tableVisible = false;
-
-    //app.validateUser($location);
+    app.validateUser($location);
 
     function init() {
 
@@ -22,14 +18,14 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
         vm.placesToCompare = [];
         vm.criterias = [];
         vm.rankCriterias = [
-            {factor: -1, description: 'Select importance...'},
-            {factor: 1/9, description: 'Way less important'},
-            {factor: 1/6, description: 'Less important'},
-            {factor: 1/3, description: 'A bit less important'},
-            {factor: 1, description: 'Same important'},
-            {factor: 3, description: 'A bit more important'},
-            {factor: 6, description: 'More important'},
-            {factor: 9, description: 'Way more important'}
+            {factor: -1, description: 'Seleccionar importancia...'},
+            {factor: 1/9, description: 'Poco importante'},
+            {factor: 1/6, description: 'Menos importante'},
+            {factor: 1/3, description: 'Un poco menos importante'},
+            {factor: 1, description: 'Misma importancia'},
+            {factor: 3, description: 'Un poco más importante'},
+            {factor: 6, description: 'Más importante'},
+            {factor: 9, description: 'Muy importante'}
         ];
     }
 
@@ -52,7 +48,7 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
                     if (cellVal && cellVal != -1) {
                         matrix.push([vm.criterias[i-1].name, vm.criterias[j].name, cellVal]);
                     } else if (cellVal == -1) {
-                        return alert('Please fill all the table cells to continue...');
+                        return alert('Por favor seleccionar la importancia de todas las celdas antes de continuar.');
                     }
                     
                 }
@@ -96,16 +92,13 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
             AhpService.runAlgorithm({
                 places: vm.placesToCompare,
                 criterias: vm.criterias,
-                rankCriterias: getRankCriterias()
+                rankCriterias: getRankCriterias(),
+                loggedUserId: app.userLogged._id
             }).then((results) => {
-                const resultsAsArray = Object.keys(results).map((key) => ({place: key, value: results[key]}));
-
-                const sortedResults = resultsAsArray.sort(function (a, b) {
-                    return -(a.value - b.value);
-                });
 
                 vm.$emit('unload');
-                alert("Los resultados son: " + JSON.stringify(results));
+                app.lastResults = results;
+                $location.path('/ahp-results/');
             });
         }
     }
@@ -117,7 +110,11 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
     vm.onCriteriaOptionClicked = function() {
         let criteriaSelected;
         vm.allCriterias.some(criteria => {
-            criteriaSelected = criteria.children.find(child => child.name === vm.selectedCriteria);
+            if (criteria.name === vm.selectedCriteria) {
+                criteriaSelected = criteria;
+            } else {
+                criteriaSelected = criteria.children.find(child => child.name === vm.selectedCriteria);
+            }
             return !!criteriaSelected;
         });
         vm.criterias.push(criteriaSelected);
@@ -131,4 +128,5 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
     vm.onGetTableContentClicked = function() {
         this.tableVisible = true;
     }
+
 }]);

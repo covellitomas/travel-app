@@ -33,7 +33,7 @@ router.post('/save', function (req, res, next) {
 });
 
 /** DELETE ALL USERS */
-router.delete('/users', function (req, res, next) {
+router.delete('/all', function (req, res, next) {
     
     User.remove({}, function (err, post) {
         if (err) return next(err);

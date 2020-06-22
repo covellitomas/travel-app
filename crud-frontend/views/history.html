@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="GameApp">
+
+    <head>
+        <title>TravelApp</title> 
+    </head>
+
+    <body>
+
+        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Historial</h1>
+            <p class="lead">Los siguientes resultados conforman el historial de búsquedas realizadas por el usuario loggeado</p>
+        </div>
+        
+        <div class="container container-ta">
+            <table class="table table-hover table-bordered table-ta">
+                <thead class="palette-dark">
+                    <tr>
+                        <th scope="col">Lugares</th>
+                        <th scope="col">Criterios</th>
+                        <th scope="col">Resultado AHP</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr ng-repeat="search in searches">
+                        <td>
+                            <ul>
+                                <span ng-repeat= "place in places[$index]">
+                                    <li>{{place}}</li>
+                                </span>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li ng-repeat="criteria in criterias[$index]">
+                                    {{criteria}}
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ol>
+                                <li ng-repeat="result in convenience[$index]">
+                                    {{result.place}}: {{result.value}}
+                                </li>
+                            </ol>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>  
+        </div>
+
+    </body>
+
+</html>

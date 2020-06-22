@@ -156,3 +156,7 @@ body {
 .stickyFooter {
     position: fixed;
 }
+
+.main-content {
+    margin-bottom: 100px;
+}

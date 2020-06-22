@@ -3,6 +3,7 @@ var router = express.Router();
 const fetch = require('node-fetch');
 const cheerio = require("cheerio");
 const AHP = require('ahp');
+const User = require('../model/user.js');
 
 const hotelsURL = "https://www.booking.com/searchresults.html?label=gen173nr-1DCAEoggI46AdIM1gEaAyIAQGYATG4ARfIAQzYAQPoAQH4AQKIAgGoAgO4AqmblfMFwAIB&sid=335822906070625de1e89bdedfedd6e5&sb=1&sb_lp=1&src=index&src_elem=sb&error_url=https%3A%2F%2Fwww.booking.com%2Findex.html%3Flabel%3Dgen173nr-1DCAEoggI46AdIM1gEaAyIAQGYATG4ARfIAQzYAQPoAQH4AQKIAgGoAgO4AqmblfMFwAIB%3Bsid%3D335822906070625de1e89bdedfedd6e5%3Bsb_price_type%3Dtotal%26%3B&ss=Miami+Beach&is_ski_area=0&ssne=Miami+Beach&ssne_untouched=Miami+Beach&dest_id=20023182&dest_type=city&checkin_year=&checkin_month=&checkout_year=&checkout_month=&group_adults=2&group_children=0&no_rooms=1&b_h4u_keep_filters=&from_sf=1#map_opened-map-header-cta";
 const attractionsURL = "https://www.tripadvisor.com/Attractions-g34439-Activities-Miami_Beach_Florida.html";
@@ -135,11 +136,28 @@ router.get('/attractions-criterias', function (req, res, next) {
     });
 });
 
+router.put('/history', function(req, res, next) {
+    console.log('entra');
+    User.updateOne(
+        { _id: '5de69f858f14e424e4644493' }, 
+        { $set: { searches: [{
+            criteria: ['Uno'],
+            places: ['Dos'],
+            convenience: ['Tres']
+        }] } }
+    ).then((updated) => {
+        res.json(updated);
+    });
+});
+
 router.post('/run', function (req, res, next) {
+
+    console.log('ENTRAA');
 
     const ahpContext = new AHP();
     const places = req.body.data.places;
     const criterias = req.body.data.criterias;
+    const loggedUserId = req.body.data.loggedUserId;
 
     const placesNames = places.map(place => place.name);
     console.log('Places: ', placesNames);
@@ -177,8 +195,23 @@ router.post('/run', function (req, res, next) {
     ahpContext.rankCriteria(req.body.data.rankCriterias);
 
     let output = ahpContext.run();
-    console.log('OUTPUT: ', output.rankedScoreMap);
-    res.json(output.rankedScoreMap);
+
+    const resultsAsArray = Object.keys(output.rankedScoreMap).map((key) => ({place: key, value: output.rankedScoreMap[key]}));
+
+    const sortedResults = resultsAsArray.sort(function (a, b) {
+        return -(a.value - b.value);
+    });
+
+    User.updateOne(
+        { _id:  loggedUserId}, 
+        { $push: { searches: {
+            criteria: criterias,
+            places: places,
+            convenience: sortedResults
+        } } }
+    ).then((updated) => {
+        res.json(sortedResults);
+    });
     
 });
 
