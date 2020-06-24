@@ -21,9 +21,9 @@ const rankCriteria =
 
 
 function _getValidCriteriaName(criteriaName) {
-    if (criteriaName !== 'Landmarks' && criteriaName !== 'Neighborhood') {
-        if (criteriaName.includes('Distance from center')) {
-            return 'Distance from center';
+    if (criteriaName !== 'Puntos turísticos' && criteriaName !== 'Zona' && criteriaName !== 'Barrio') {
+        if (criteriaName.includes('Distancia desde el centro')) {
+            return 'Distancia desde el centro';
         };
         return criteriaName;
     }

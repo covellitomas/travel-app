@@ -72,7 +72,7 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
                     }
 
                     place.criterias.forEach(criteria => {
-                        if (!vm.criterias.some(c => c.name === criteria.name)) {
+                        if (!vm.allCriterias.some(c => c.name === criteria.name)) {
                             vm.allCriterias.push(criteria);
                             CriteriaService.saveCriteria(criteria).then((savedCriteria) => {
                                 const x = 0;
@@ -80,6 +80,8 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
                         }
                     });
 
+                    vm.hotelsUrl = "";
+                    vm.attractionsUrl = "";
                     vm.$emit('unload');
                 });
             });
