@@ -19,13 +19,15 @@ app.controller('NewSearchController', ['$scope', 'PlaceService', 'AhpService', '
         vm.criterias = [];
         vm.rankCriterias = [
             {factor: -1, description: 'Seleccionar importancia...'},
+            {factor: 1/9, description: 'Irrelevante'},
             {factor: 1/7, description: 'Poco importante'},
             {factor: 1/5, description: 'Menos importante'},
             {factor: 1/3, description: 'Un poco menos importante'},
             {factor: 1, description: 'Misma importancia'},
             {factor: 3, description: 'Un poco más importante'},
             {factor: 5, description: 'Más importante'},
-            {factor: 7, description: 'Muy importante'}
+            {factor: 7, description: 'Muy importante'},
+            {factor: 9, description: 'Extremadamente importante'}
         ];
     }
 
